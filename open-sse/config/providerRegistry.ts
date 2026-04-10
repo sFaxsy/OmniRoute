@@ -418,8 +418,6 @@ export const REGISTRY: Record<string, RegistryEntry> = {
       { id: "gpt-5.1-codex-max", name: "GPT-5.1 Codex Max", targetFormat: "openai-responses" },
       { id: "gpt-5.2", name: "GPT-5.2" },
       { id: "gpt-5.2-codex", name: "GPT-5.2 Codex", targetFormat: "openai-responses" },
-      { id: "gpt-5.4", name: "GPT 5.4", targetFormat: "openai-responses" },
-      { id: "gpt-5.4-mini", name: "GPT 5.4 Mini", targetFormat: "openai-responses" },
       { id: "claude-haiku-4.5", name: "Claude Haiku 4.5" },
       { id: "claude-opus-4.1", name: "Claude Opus 4.1" },
       { id: "claude-opus-4.6", name: "Claude Opus 4.6" },
