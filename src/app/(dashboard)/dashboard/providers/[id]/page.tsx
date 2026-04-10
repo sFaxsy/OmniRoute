@@ -1948,11 +1948,14 @@ export default function ProviderDetailPage() {
   const handleToggleModelHidden = async (modelId: string, hidden: boolean): Promise<void> => {
     setTogglingModelId(modelId);
     try {
-      const res = await fetch(`/api/provider-models?provider=${encodeURIComponent(providerId)}&modelId=${encodeURIComponent(modelId)}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isHidden: hidden }),
-      });
+      const res = await fetch(
+        `/api/provider-models?provider=${encodeURIComponent(providerId)}&modelId=${encodeURIComponent(modelId)}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isHidden: hidden }),
+        }
+      );
       if (!res.ok) {
         const detail = await res.text().catch(() => "");
         notify.error(detail || t("failedSaveCustomModel"));
@@ -2375,24 +2378,26 @@ export default function ProviderDetailPage() {
                 : t("providerProxy")}
             </button>
           </div>
-          {connections.length > 1 && (
-            <button
-              onClick={handleBatchTestAll}
-              disabled={batchTesting || !!retestingId}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                batchTesting
-                  ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                  : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
-              }`}
-              title={t("testAll")}
-              aria-label={t("testAll")}
-            >
-              <span className="material-symbols-outlined text-[14px]">
-                {batchTesting ? "sync" : "play_arrow"}
-              </span>
-              {batchTesting ? t("testing") : t("testAll")}
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {connections.length > 1 && (
+              <button
+                onClick={handleBatchTestAll}
+                disabled={batchTesting || !!retestingId}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                  batchTesting
+                    ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
+                    : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                }`}
+                title={t("testAll")}
+                aria-label={t("testAll")}
+              >
+                <span className="material-symbols-outlined text-[14px]">
+                  {batchTesting ? "sync" : "play_arrow"}
+                </span>
+                {batchTesting ? t("testing") : t("testAll")}
+              </button>
+            )}
+          </div>
           {!isCompatible ? (
             <div className="flex items-center gap-2">
               <Button size="sm" icon="add" onClick={openPrimaryAddFlow}>
@@ -2981,7 +2986,7 @@ function ModelRow({
             onClick={() => onToggleHidden(model.id, !isHidden)}
             disabled={togglingHidden}
             className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary disabled:opacity-40 disabled:cursor-not-allowed"
-            title={isHidden ? (t("showModel") || "Show model") : (t("hideModel") || "Hide model")}
+            title={isHidden ? t("showModel") || "Show model" : t("hideModel") || "Hide model"}
           >
             <span className="material-symbols-outlined text-sm">
               {isHidden ? "visibility_off" : "visibility"}
