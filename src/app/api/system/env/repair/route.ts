@@ -7,13 +7,14 @@
  */
 import { copyFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 
-const SYNC_HELPER_PATH = "../../../../../../scripts/sync-env.mjs";
+const SYNC_HELPER_PATH = join(process.cwd(), "scripts/sync-env.mjs");
 
 async function loadSyncHelpers() {
-  return import(SYNC_HELPER_PATH);
+  return import(pathToFileURL(SYNC_HELPER_PATH).href);
 }
 
 function createEnvBackup() {
